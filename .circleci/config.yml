@@ -52,7 +52,7 @@ workflows:
         - matches:
             pattern: "^staging-abcc-[0-9-]+$"
             value: << pipeline.git.tag >>
-        - equal: [ "development", << pipeline.git.branch >> ]
+        - equal: [ "main", << pipeline.git.branch >> ]
     jobs:
       - say_bye:
          <<: *tag-filter
