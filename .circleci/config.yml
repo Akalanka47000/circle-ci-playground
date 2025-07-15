@@ -48,7 +48,8 @@ workflows:
         pattern: "^staging-abc-[0-9-]+$"
         value: << pipeline.git.tag >>
     jobs:
-      - say_bye
+      - say_bye:
+         <<: *tag-filter
       - say_hello:
           requires:
             - say_bye
