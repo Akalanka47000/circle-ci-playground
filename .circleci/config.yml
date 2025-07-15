@@ -44,9 +44,11 @@ default-branch-filter: &default-branch-filter
 workflows:
   say-hello-workflow:
     when:
-      matches:
-        pattern: "/staging-abcc-[0-9-]+/"
-        value: << pipeline.git.tag >>
+      or:
+        - matches:
+            pattern: "^staging-abcc-[0-9-]+$"
+            value: << pipeline.git.tag >>
+        - equal: [ "development", << pipeline.git.branch >> ]
     jobs:
       - say_bye:
          <<: *tag-filter
