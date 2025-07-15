@@ -30,11 +30,22 @@ jobs:
           name: "Say Bye"
           command: "echo Bye, World!"
 
+# Start anchors
+tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is needed for the workflow level tag filters to work since it checks job level filters first.
+  filters:
+    tags:
+      only: /.*/
+default-branch-trigger: &default-branch-trigger
+  filters:
+    branch:
+      only: main
+# End anchors
+
 workflows:
   say-hello-workflow:
     when:
       matches:
-        pattern: "^R.+$"
+        pattern: "/staging-abc-[0-9-]+/"
         value: << pipeline.git.tag >>
     jobs:
       - say_bye
