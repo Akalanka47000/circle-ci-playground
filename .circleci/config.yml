@@ -56,7 +56,8 @@ workflows:
     jobs:
       - say_bye:
          <<: *tag-filter
-      - say_tata
+      - say_tata:
+         <<: *tag-filter
       - say_hello:
           requires:
             - say_bye
