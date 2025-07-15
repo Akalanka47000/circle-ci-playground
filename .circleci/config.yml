@@ -22,7 +22,6 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
   say_bye:
-    name: "Say Bye"
     docker:
       - image: cimg/base:current
     steps:
@@ -61,7 +60,7 @@ workflows:
           requires:
             - say_bye
             - say_tata
-            
+
   staging:
     when:
       or:
