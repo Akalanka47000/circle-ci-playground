@@ -35,7 +35,7 @@ tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is n
   filters:
     tags:
       only: /.*/
-default-branch-trigger: &default-branch-trigger
+default-branch-filter: &default-branch-filter
   filters:
     branch:
       only: main
@@ -52,3 +52,4 @@ workflows:
       - say_hello:
           requires:
             - say_bye
+          <<: *tag-filter
