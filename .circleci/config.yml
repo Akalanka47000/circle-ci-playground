@@ -22,6 +22,7 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
   say_bye:
+    name: "Say Bye"
     docker:
       - image: cimg/base:current
     steps:
@@ -47,7 +48,6 @@ tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is n
 
 workflows:
   say-hello-workflow:
-    name: Say Hello
     when:
       or:
         - matches:
