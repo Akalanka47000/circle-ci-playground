@@ -29,5 +29,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello:
-          filters:  
-              branches: { only: "main" }
+           when: pipeline.event.name == "pull_request" and pipeline.event.action == "opened"
