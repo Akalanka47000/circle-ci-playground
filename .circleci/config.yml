@@ -30,4 +30,4 @@ workflows:
     jobs:
       - say-hello:
           filters:  
-              branches: { only: "/.*/" }
+              branches: { only: "main" }
