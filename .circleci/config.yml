@@ -52,6 +52,7 @@ workflows:
         - equal: ["pull_request", << pipeline.event.name >> ]
         - or:
             - equal: ["opened", << pipeline.event.action >> ]
+            - equal: ["reopened", << pipeline.event.action >> ]
             - equal: ["synchronize", << pipeline.event.action >> ]
     jobs:
       - say_bye
