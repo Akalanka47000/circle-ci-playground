@@ -40,7 +40,8 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say_bye
+      - say_bye:
+          <<: *skip-self-run
       - say_hello:
           filters:
             branches: { ignore: "/.*/" }
