@@ -37,7 +37,11 @@ workflows:
         pattern: "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
         value: << pipeline.git.tag >>
     jobs:
-      - say_bye
+      - say_bye:
+          filters:
+              tags:
+                only:
+                  - /.*/
       - say_hello:
           filters:
             tags:
