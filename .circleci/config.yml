@@ -45,7 +45,7 @@ workflows:
   say-hello-workflow:
     when:
       matches:
-        pattern: "/staging-abc-[0-9-]+/"
+        pattern: "^staging-abc-[0-9-]+$"
         value: << pipeline.git.tag >>
     jobs:
       - say_bye
