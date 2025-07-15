@@ -40,8 +40,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say_bye:
-          <<: *skip-self-run
+      - say_bye
       - say_hello:
           requires:
             - say_bye
