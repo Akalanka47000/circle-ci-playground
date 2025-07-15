@@ -39,7 +39,7 @@ default-branch-filter: &default-branch-filter
   filters:
     branch:
       only: main
-# End anchors
+# End anchors2
 
 workflows:
   say-hello-workflow:
