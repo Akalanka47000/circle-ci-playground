@@ -2,13 +2,6 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-skip-self-run: &skip-self-run
-  filters:
-    branches:
-      ignore: /.*/
-    tags:
-      ignore: /.*/
-
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -39,12 +32,12 @@ jobs:
 
 workflows:
   say-hello-workflow:
+    when:
+      matches:
+        pattern: "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        value: << pipeline.git.tag >>
     jobs:
-      - say_bye:
-          <<: *skip-self-run
+      - say_bye
       - say_hello:
-          filters:
-            branches: { ignore: "/.*/" }
-            tags: { only: '/v[0-9]+\.[0-9]+\.[0-9]+/' }
           requires:
             - say_bye
