@@ -47,11 +47,26 @@ tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is n
 # End anchors
 
 workflows:
-  say-hello-workflow:
+  checks:
+    when:
+      and:
+        - equal: ["pull_request", << pipeline.event.name >> ]
+        - or:
+            - equal: ["opened", << pipeline.event.action >> ]
+            - equal: ["synchronize", << pipeline.event.action >> ]
+    jobs:
+      - say_bye
+      - say_tata
+      - say_hello:
+          requires:
+            - say_bye
+            - say_tata
+            
+  staging:
     when:
       or:
         - matches:
-            pattern: "^staging-abcc-[0-9-]+$"
+            pattern: "^staging-[0-9-]+$"
             value: << pipeline.git.tag >>
         - equal: [ "main", << pipeline.git.branch >> ]
     jobs:
