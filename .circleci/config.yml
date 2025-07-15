@@ -2,6 +2,13 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+skip-self-run: &skip-self-run
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      ignore: /.*/
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -36,7 +43,8 @@ workflows:
   say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - say_bye
+      - say_bye:
+          <<: *skip-self-run
       - say_hello:
           filters:
             branches: { ignore: "/.*/" }
