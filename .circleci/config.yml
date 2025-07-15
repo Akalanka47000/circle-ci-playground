@@ -39,7 +39,7 @@ jobs:
           command: "echo Tata, World!"
 
 # Start anchors
-tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is needed for the workflow level tag filters to work since it checks job level filters first.
+tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is needed for the workflow level tag filters to work.
   filters:
     tags:
       only: /.*/
