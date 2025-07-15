@@ -37,19 +37,13 @@ jobs:
           name: "Say Bye"
           command: "echo Bye, World!"
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  say-hello-workflow:
     jobs:
       - say_bye:
           <<: *skip-self-run
       - say_hello:
           filters:
-            branches: { ignore: "/.*/" }
-            tags:
-              only:
-                - '^v[0-9]+\.[0-9]+\.[0-9]+$'
+            tags: { only: '/v[0-9]+\.[0-9]+\.[0-9]+/' }
           requires:
             - say_bye
