@@ -29,16 +29,20 @@ jobs:
       - run:
           name: "Say Bye"
           command: "echo Bye, World!"
+  say_tata:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: "Say Tata"
+          command: "echo Tata, World!"
 
 # Start anchors
 tag-filter: &tag-filter # Use this to mark a job to run on tag pushes. This is needed for the workflow level tag filters to work since it checks job level filters first.
   filters:
     tags:
       only: /.*/
-default-branch-filter: &default-branch-filter
-  filters:
-    branch:
-      only: main
 # End anchors
 
 workflows:
@@ -52,7 +56,9 @@ workflows:
     jobs:
       - say_bye:
          <<: *tag-filter
+      - say_tata:
       - say_hello:
           requires:
             - say_bye
+            - say_tata
           <<: *tag-filter
